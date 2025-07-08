@@ -4,12 +4,10 @@ import 'package:todos_api/todos_api.dart';
 /// A repository that handles `todo` related requests.
 /// {@endtemplate}
 class TodosRepository {
-  /// {@macro todos_repository}
-  const TodosRepository({
-    required TodosApi todosApi,
-  }) : _todosApi = todosApi;
-
   final TodosApi _todosApi;
+
+  /// {@macro todos_repository}
+  const TodosRepository({required TodosApi todosApi}) : _todosApi = todosApi;
 
   /// Provides a [Stream] of all todos.
   Stream<List<Todo>> getTodos() => _todosApi.getTodos();

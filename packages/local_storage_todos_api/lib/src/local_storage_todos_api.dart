@@ -10,12 +10,12 @@ import 'package:todos_api/todos_api.dart';
 /// A Flutter implementation of the [TodosApi] that uses local storage.
 /// {@endtemplate}
 class LocalStorageTodosApi extends TodosApi {
+  final SharedPreferences _plugin;
+
   /// {@macro local_storage_todos_api}
   LocalStorageTodosApi({required SharedPreferences plugin}) : _plugin = plugin {
     _init();
   }
-
-  final SharedPreferences _plugin;
 
   late final _todoStreamController = BehaviorSubject<List<Todo>>.seeded(const []);
 
