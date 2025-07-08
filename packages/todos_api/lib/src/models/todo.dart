@@ -22,6 +22,11 @@ part 'todo.g.dart';
 @immutable
 @JsonSerializable()
 class Todo extends Equatable {
+  /// {@macro todo_item}
+  Todo({required this.title, String? id, this.description = '', this.isCompleted = false})
+    : assert(id == null || id.isNotEmpty, 'id must either be null or not empty'),
+      id = id ?? const Uuid().v4();
+
   /// The unique identifier of the `todo`.
   ///
   /// Cannot be empty.
@@ -41,11 +46,6 @@ class Todo extends Equatable {
   ///
   /// Defaults to `false`.
   final bool isCompleted;
-
-  /// {@macro todo_item}
-  Todo({required this.title, String? id, this.description = '', this.isCompleted = false})
-    : assert(id == null || id.isNotEmpty, 'id must either be null or not empty'),
-      id = id ?? const Uuid().v4();
 
   /// Returns a copy of this `todo` with the given values updated.
   ///
