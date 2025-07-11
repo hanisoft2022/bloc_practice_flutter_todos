@@ -18,20 +18,14 @@ class TodosOverviewOptionsButton extends StatelessWidget {
     final completedTodosAmount = todos.where((todo) => todo.isCompleted).length;
 
     return PopupMenuButton<TodosOverviewOption>(
-      shape: const ContinuousRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-      ),
+      shape: const ContinuousRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
       tooltip: l10n.todosOverviewOptionsTooltip,
       onSelected: (options) {
         switch (options) {
           case TodosOverviewOption.toggleAll:
-            context.read<TodosOverviewBloc>().add(
-              const TodosOverviewToggleAllRequested(),
-            );
+            context.read<TodosOverviewBloc>().add(const TodosOverviewToggleAllRequested());
           case TodosOverviewOption.clearCompleted:
-            context.read<TodosOverviewBloc>().add(
-              const TodosOverviewClearCompletedRequested(),
-            );
+            context.read<TodosOverviewBloc>().add(const TodosOverviewClearCompletedRequested());
         }
       },
       itemBuilder: (context) {

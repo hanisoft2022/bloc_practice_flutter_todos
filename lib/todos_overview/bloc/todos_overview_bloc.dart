@@ -7,6 +7,8 @@ part 'todos_overview_event.dart';
 part 'todos_overview_state.dart';
 
 class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
+  final TodosRepository _todosRepository;
+
   TodosOverviewBloc({required TodosRepository todosRepository})
     : _todosRepository = todosRepository,
       super(const TodosOverviewState()) {
@@ -18,8 +20,6 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     on<TodosOverviewToggleAllRequested>(_onToggleAllRequested);
     on<TodosOverviewClearCompletedRequested>(_onClearCompletedRequested);
   }
-
-  final TodosRepository _todosRepository;
 
   Future<void> _onSubscriptionRequested(
     TodosOverviewSubscriptionRequested event,
@@ -56,7 +56,6 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     Emitter<TodosOverviewState> emit,
   ) async {
     assert(state.lastDeletedTodo != null, 'Last deleted todo can not be null.');
-
     final todo = state.lastDeletedTodo!;
     emit(state.copyWith(lastDeletedTodo: () => null));
     await _todosRepository.saveTodo(todo);
