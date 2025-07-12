@@ -16,11 +16,7 @@ final class StatsState extends Equatable {
   @override
   List<Object> get props => [status, completedTodos, activeTodos];
 
-  StatsState copyWith({
-    StatsStatus? status,
-    int? completedTodos,
-    int? activeTodos,
-  }) {
+  StatsState copyWith({StatsStatus? status, int? completedTodos, int? activeTodos}) {
     return StatsState(
       status: status ?? this.status,
       completedTodos: completedTodos ?? this.completedTodos,

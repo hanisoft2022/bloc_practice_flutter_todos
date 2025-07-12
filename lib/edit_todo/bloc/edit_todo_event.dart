@@ -8,18 +8,18 @@ sealed class EditTodoEvent extends Equatable {
 }
 
 final class EditTodoTitleChanged extends EditTodoEvent {
-  const EditTodoTitleChanged(this.title);
-
   final String title;
+
+  const EditTodoTitleChanged(this.title);
 
   @override
   List<Object> get props => [title];
 }
 
 final class EditTodoDescriptionChanged extends EditTodoEvent {
-  const EditTodoDescriptionChanged(this.description);
-
   final String description;
+
+  const EditTodoDescriptionChanged(this.description);
 
   @override
   List<Object> get props => [description];

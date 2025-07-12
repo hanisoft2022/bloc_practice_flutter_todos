@@ -3,24 +3,21 @@ part of 'edit_todo_bloc.dart';
 enum EditTodoStatus { initial, loading, success, failure }
 
 extension EditTodoStatusX on EditTodoStatus {
-  bool get isLoadingOrSuccess => [
-    EditTodoStatus.loading,
-    EditTodoStatus.success,
-  ].contains(this);
+  bool get isLoadingOrSuccess => [EditTodoStatus.loading, EditTodoStatus.success].contains(this);
 }
 
 final class EditTodoState extends Equatable {
+  final EditTodoStatus status;
+  final Todo? initialTodo;
+  final String title;
+  final String description;
+
   const EditTodoState({
     this.status = EditTodoStatus.initial,
     this.initialTodo,
     this.title = '',
     this.description = '',
   });
-
-  final EditTodoStatus status;
-  final Todo? initialTodo;
-  final String title;
-  final String description;
 
   bool get isNewTodo => initialTodo == null;
 

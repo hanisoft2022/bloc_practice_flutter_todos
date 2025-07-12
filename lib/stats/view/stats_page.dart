@@ -10,9 +10,9 @@ class StatsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => StatsBloc(
-        todosRepository: context.read<TodosRepository>(),
-      )..add(const StatsSubscriptionRequested()),
+      create: (context) =>
+          StatsBloc(todosRepository: context.read<TodosRepository>())
+            ..add(const StatsSubscriptionRequested()),
       child: const StatsView(),
     );
   }
@@ -28,28 +28,20 @@ class StatsView extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.statsAppBarTitle),
-      ),
+      appBar: AppBar(title: Text(l10n.statsAppBarTitle)),
       body: Column(
         children: [
           ListTile(
             key: const Key('statsView_completedTodos_listTile'),
             leading: const Icon(Icons.check_rounded),
             title: Text(l10n.statsCompletedTodoCountLabel),
-            trailing: Text(
-              '${state.completedTodos}',
-              style: textTheme.headlineSmall,
-            ),
+            trailing: Text('${state.completedTodos}', style: textTheme.headlineSmall),
           ),
           ListTile(
             key: const Key('statsView_activeTodos_listTile'),
             leading: const Icon(Icons.radio_button_unchecked_rounded),
             title: Text(l10n.statsActiveTodoCountLabel),
-            trailing: Text(
-              '${state.activeTodos}',
-              style: textTheme.headlineSmall,
-            ),
+            trailing: Text('${state.activeTodos}', style: textTheme.headlineSmall),
           ),
         ],
       ),
