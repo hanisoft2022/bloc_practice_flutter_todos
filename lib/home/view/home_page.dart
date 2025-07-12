@@ -26,7 +26,7 @@ class HomeView extends StatelessWidget {
         index: selectedTab.index,
         children: const [TodosOverviewPage(), StatsPage()],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
         key: const Key('homeView_addTodo_floatingActionButton'),
