@@ -10,36 +10,42 @@ import 'package:todos_api/todos_api.dart';
 /// A Flutter implementation of the [TodosApi] that uses local storage.
 /// {@endtemplate}
 class LocalStorageTodosApi extends TodosApi {
+  /// The key used for storing the todos locally.
+  /// This is only exposed for testing and shouldn't be used by consumers of this library.
+  @visibleForTesting
+  static const kTodosCollectionKey = '__todos_collection_key__';
+
+  final SharedPreferences _plugin;
+
+  late final BehaviorSubject<List<Todo>> _todoStreamController = BehaviorSubject<List<Todo>>.seeded(
+    const [],
+  );
+
   /// {@macro local_storage_todos_api}
   LocalStorageTodosApi({required SharedPreferences plugin}) : _plugin = plugin {
     _init();
   }
 
-  final SharedPreferences _plugin;
-
-  late final _todoStreamController = BehaviorSubject<List<Todo>>.seeded(const []);
-
-  /// The key used for storing the todos locally.
-  ///
-  /// This is only exposed for testing and shouldn't be used by consumers of
-  /// this library.
-  @visibleForTesting
-  static const kTodosCollectionKey = '__todos_collection_key__';
-
-  String? _getValue(String key) => _plugin.getString(key);
-  Future<void> _setValue(String key, String value) => _plugin.setString(key, value);
-
+  /// Initialization - loads todos from local storage and seeds the stream.
   void _init() {
     final todosJson = _getValue(kTodosCollectionKey);
     if (todosJson != null) {
-      final todos = List<Map<dynamic, dynamic>>.from(
-        json.decode(todosJson) as List,
-      ).map((jsonMap) => Todo.fromJson(Map<String, dynamic>.from(jsonMap))).toList();
+      final todos = (json.decode(todosJson) as List)
+          .map((jsonMap) => Todo.fromJson(Map<String, dynamic>.from(jsonMap)))
+          .toList();
       _todoStreamController.add(todos);
     } else {
       _todoStreamController.add(const []);
     }
   }
+
+  // ---------------- Private helper methods ----------------
+
+  String? _getValue(String key) => _plugin.getString(key);
+
+  Future<void> _setValue(String key, String value) => _plugin.setString(key, value);
+
+  // ---------------- TodosApi interface implementations ----------------
 
   @override
   Stream<List<Todo>> getTodos() => _todoStreamController.asBroadcastStream();
