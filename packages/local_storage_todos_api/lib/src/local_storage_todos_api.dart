@@ -9,7 +9,7 @@ import 'package:todos_api/todos_api.dart';
 /// {@template local_storage_todos_api}
 /// A Flutter implementation of the [TodosApi] that uses local storage.
 /// {@endtemplate}
-class LocalStorageTodosApi extends TodosApi {
+class LocalStorageTodosApi implements TodosApi {
   /// The key used for storing the todos locally.
   /// This is only exposed for testing and shouldn't be used by consumers of this library.
   @visibleForTesting

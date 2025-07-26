@@ -3,7 +3,7 @@ import 'package:todos_api/todos_api.dart';
 /// {@template todos_api}
 /// The interface for an API that provides access to a list of todos.
 /// {@endtemplate}
-abstract class TodosApi {
+abstract interface class TodosApi {
   /// {@macro todos_api}
   const TodosApi();
 
