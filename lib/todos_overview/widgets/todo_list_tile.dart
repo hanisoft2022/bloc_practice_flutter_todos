@@ -3,15 +3,15 @@ import 'package:todos_repository/todos_repository.dart';
 
 class TodoListTile extends StatelessWidget {
   final Todo todo;
-  final ValueChanged<bool>? onToggleCompleted;
   final DismissDirectionCallback? onDismissed;
+  final ValueChanged<bool>? onToggleCompleted;
   final VoidCallback? onTap;
 
   const TodoListTile({
     required this.todo,
     super.key,
-    this.onToggleCompleted,
     this.onDismissed,
+    this.onToggleCompleted,
     this.onTap,
   });
 
